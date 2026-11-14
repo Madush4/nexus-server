@@ -1,4 +1,4 @@
-package com.neuxs.nexus_server;
+package com.nexus.nexus_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
