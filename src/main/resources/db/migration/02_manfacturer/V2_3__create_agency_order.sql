@@ -1,9 +1,4 @@
--- =====================================================================
--- V2_3  agency_order, agency_order_item
--- Owner : Bandara (manufacturer / distribution)
--- One order per agency per SAP report. Items hold requested vs the
--- quantity the manufacturer could actually allocate.
--- =====================================================================
+
 CREATE TABLE agency_order (
     order_id    UUID         NOT NULL DEFAULT gen_random_uuid(),
     report_id   UUID         NOT NULL,

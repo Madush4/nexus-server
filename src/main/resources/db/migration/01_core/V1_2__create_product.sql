@@ -1,7 +1,4 @@
--- =====================================================================
--- V1_2  product  (single merged definition used by every module)
--- Owner : Bandara (product / agency / distribution)
--- =====================================================================
+
 CREATE TABLE product (
     product_id      UUID          NOT NULL DEFAULT gen_random_uuid(),
     product_code    VARCHAR(50)   NOT NULL,

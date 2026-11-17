@@ -1,9 +1,4 @@
--- =====================================================================
--- V2_4  warehouse_handover, warehouse_handover_item
--- Owner : Bandara (manufacturer -> warehouse; this is the hand-off
---         point into the Dispatch module, V3)
--- total item count is NOT stored - count the items (derived value).
--- =====================================================================
+
 CREATE TABLE warehouse_handover (
     handover_id         UUID          NOT NULL DEFAULT gen_random_uuid(),
     handover_reference  VARCHAR(50)   NOT NULL,

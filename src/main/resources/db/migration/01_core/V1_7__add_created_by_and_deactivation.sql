@@ -1,17 +1,6 @@
--- =====================================================================
--- V1_7  Who created / deactivated warehouses, agencies and users
--- Owner : core (auth & access)
---
--- Business rule: the manufacturing admin adds and removes warehouses,
--- agencies and their admins (warehouse_admin, agency_manager).
---
--- "Remove" = DEACTIVATE (soft delete), never DELETE:
---   * old dispatches, trips, reports still point at these rows (FKs)
---   * history and audit must survive
--- Hard DELETE is still blocked by the existing FKs, which is intended.
--- =====================================================================
 
--- ---------- warehouse ----------
+
+
 ALTER TABLE warehouse
     ADD COLUMN created_by      UUID,
     ADD COLUMN updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -26,7 +15,7 @@ ALTER TABLE warehouse
 CREATE TRIGGER trg_warehouse_updated_at BEFORE UPDATE ON warehouse
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
--- ---------- agency ----------
+
 ALTER TABLE agency
     ADD COLUMN created_by      UUID,
     ADD COLUMN deactivated_at  TIMESTAMPTZ,
@@ -36,12 +25,7 @@ ALTER TABLE agency
     ADD CONSTRAINT ck_agency_deactivation   CHECK (is_active = (deactivated_at IS NULL)
                                                    AND (deactivated_at IS NULL) = (deactivated_by IS NULL));
 
--- ---------- app_user ----------
--- created_by: who registered this account (self-reference).
---   manufacturing admin -> warehouse_admin, agency_manager
---   (warehouse admin -> supervisors, agency manager -> agents, if you allow it)
--- NULL only for the first seeded manufacturing admin.
--- Removing a user = account_status 'INACTIVE' + deactivated_at/by.
+
 ALTER TABLE app_user
     ADD COLUMN created_by      UUID,
     ADD COLUMN deactivated_at  TIMESTAMPTZ,

@@ -1,12 +1,4 @@
--- =====================================================================
--- V1_3  agency, operational_area, retail_outlet
--- Owner : Bandara (product / agency / distribution)
---
--- GPS: latitude/longitude are stored (NUMERIC(9,6) ~ 0.1 m precision)
--- because route optimisation and the map need real coordinates.
--- A Google Maps link is NOT stored - the frontend builds it:
---   https://www.google.com/maps?q=<latitude>,<longitude>
--- =====================================================================
+
 CREATE TABLE agency (
     agency_id       UUID          NOT NULL DEFAULT gen_random_uuid(),
     agency_code     VARCHAR(20)   NOT NULL,

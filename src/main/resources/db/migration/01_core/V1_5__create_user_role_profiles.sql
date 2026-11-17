@@ -1,13 +1,4 @@
--- =====================================================================
--- V1_5  Subclasses of app_user (EER disjoint specialization)
--- Owner : Bandara (auth & access)
---
--- Each subclass:
---   * PK = user_id (shared primary key with app_user)
---   * has a fixed role column + composite FK (user_id, role) ->
---     app_user(user_id, role), so an AGENT row can only point at a
---     user whose role is AGENT. This enforces the disjointness rule.
--- =====================================================================
+
 CREATE TABLE manufacturing_admin (
     user_id  UUID        NOT NULL,
     role     VARCHAR(30) NOT NULL DEFAULT 'MANUFACTURING_ADMIN',
