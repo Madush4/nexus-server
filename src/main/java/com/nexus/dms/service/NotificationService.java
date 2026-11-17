@@ -2,6 +2,7 @@ package com.nexus.dms.service;
 
 import com.nexus.dms.entity.Notification;
 import com.nexus.dms.repository.NotificationRepository;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,9 @@ public class NotificationService {
         this.repository = repository;
     }
 
-    public List<Notification> listNotifications(String recipientEmail) {
-        if (recipientEmail != null && !recipientEmail.isBlank()) {
-            return repository.findByRecipientEmailOrderByCreatedAtDesc(recipientEmail);
+    public List<Notification> listNotifications(UUID userId) {
+        if (userId != null) {
+            return repository.findByUserIdOrderByCreatedAtDesc(userId);
         }
         return repository.findAll();
     }
@@ -33,7 +34,7 @@ public class NotificationService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "No notification with id: " + notificationId));
         item.setIsRead(true);
+        item.setReadAt(OffsetDateTime.now());
         return repository.save(item);
     }
 }
-

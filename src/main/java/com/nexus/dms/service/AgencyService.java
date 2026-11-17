@@ -33,8 +33,16 @@ public class AgencyService {
 
     public Agency updateAgency(UUID agencyId, Agency payload) {
         Agency current = getAgency(agencyId);
-        current.setName(payload.getName());
+        current.setAgencyCode(payload.getAgencyCode());
+        current.setAgencyName(payload.getAgencyName());
+        current.setEmail(payload.getEmail());
+        current.setContactNumber(payload.getContactNumber());
         current.setAddress(payload.getAddress());
+        current.setLatitude(payload.getLatitude());
+        current.setLongitude(payload.getLongitude());
+        if (payload.getIsActive() != null) {
+            current.setIsActive(payload.getIsActive());
+        }
         return repository.save(current);
     }
 
@@ -42,4 +50,3 @@ public class AgencyService {
         repository.delete(getAgency(agencyId));
     }
 }
-

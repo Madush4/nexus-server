@@ -27,8 +27,8 @@ public class NotificationController {
     }
 
     @GetMapping
-    public List<Notification> getAll(@RequestParam(required = false) String recipientEmail) {
-        return service.listNotifications(recipientEmail);
+    public List<Notification> getAll(@RequestParam(required = false) UUID userId) {
+        return service.listNotifications(userId);
     }
 
     @PostMapping
@@ -42,4 +42,3 @@ public class NotificationController {
         return service.markRead(id);
     }
 }
-
