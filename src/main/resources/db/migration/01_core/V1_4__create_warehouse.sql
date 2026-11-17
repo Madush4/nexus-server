@@ -1,7 +1,4 @@
--- =====================================================================
--- V1_4  warehouse
--- Owner : Bandara (core master data)
--- =====================================================================
+
 CREATE TABLE warehouse (
     warehouse_id    UUID          NOT NULL DEFAULT gen_random_uuid(),
     warehouse_code  VARCHAR(20)   NOT NULL,

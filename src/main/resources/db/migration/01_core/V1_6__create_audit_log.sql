@@ -1,9 +1,4 @@
--- =====================================================================
--- V1_6  audit_log  (replaces manufacturer-only admin_activity_log;
---                   every module writes here)
--- Owner : Bandara (auth & access)
--- BIGINT identity instead of UUID: append-only, high volume, ordered.
--- =====================================================================
+
 CREATE TABLE audit_log (
     log_id       BIGINT       GENERATED ALWAYS AS IDENTITY,
     user_id      UUID,

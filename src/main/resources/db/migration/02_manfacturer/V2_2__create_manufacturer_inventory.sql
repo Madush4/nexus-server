@@ -1,9 +1,4 @@
--- =====================================================================
--- V2_2  manufacturer_inventory, manufacturer_stock_movement
--- Owner : Bandara (manufacturer)
--- available quantity is NOT stored: available = on_hand - reserved
--- (see view v_manufacturer_stock in R__reporting_views.sql)
--- =====================================================================
+
 CREATE TABLE manufacturer_inventory (
     inventory_id         UUID         NOT NULL DEFAULT gen_random_uuid(),
     product_id           UUID         NOT NULL,

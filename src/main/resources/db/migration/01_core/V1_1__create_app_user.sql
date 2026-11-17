@@ -1,10 +1,4 @@
--- =====================================================================
--- V1_1  app_user  (EER superclass "User")
--- Owner : Bandara (auth & access)
--- One login table for every role. Role-specific data lives in the
--- subclass tables created in V1_5 (disjoint, total specialization).
--- ("user" is a reserved word in PostgreSQL, so the table is app_user.)
--- =====================================================================
+
 CREATE TABLE app_user (
     user_id         UUID         NOT NULL DEFAULT gen_random_uuid(),
     full_name       VARCHAR(150) NOT NULL,

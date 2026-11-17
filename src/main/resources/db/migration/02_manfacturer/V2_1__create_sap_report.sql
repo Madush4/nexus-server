@@ -1,9 +1,4 @@
--- =====================================================================
--- V2_1  sap_report, sap_report_item
--- Owner : Bandara (manufacturer / ERP integration)
--- A manufacturing admin uploads an ERP (SAP-style) report; each line
--- says how much of a product an agency should receive.
--- =====================================================================
+
 CREATE TABLE sap_report (
     report_id    UUID          NOT NULL DEFAULT gen_random_uuid(),
     uploaded_by  UUID          NOT NULL,
