@@ -1,0 +1,44 @@
+# Local development
+#   Database only (normal use):     docker compose up -d
+#   Database + backend in Docker:   docker compose --profile app up -d --build
+#   Stop:                           docker compose down
+#   Stop + DELETE all local data:   docker compose down -v
+# Values come from .env (copy .env.example -> .env)
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: nexus-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-nexus}
+      POSTGRES_USER: ${DB_USER:-nexus}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-nexus_dev_pw}
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - nexus-pgdata:/var/lib/postgresql
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pg_isready -U ${DB_USER:-nexus} -d ${DB_NAME:-nexus}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    profiles: ["app"] # only starts with --profile app
+    build: .
+    container_name: nexus-backend
+    environment:
+      DB_HOST: postgres # service name inside the Docker network
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-nexus}
+      DB_USER: ${DB_USER:-nexus}
+      DB_PASSWORD: ${DB_PASSWORD:-nexus_dev_pw}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  nexus-pgdata:
